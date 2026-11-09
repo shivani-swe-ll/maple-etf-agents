@@ -1,0 +1,75 @@
+{
+  "_note": "Approximate ETF facts for demo use. Numbers change over time. Always check the issuer's website and update this file before relying on it.",
+  "etfs": [
+    {
+      "ticker": "XEQT.TO", "name": "iShares Core Equity ETF Portfolio", "issuer": "BlackRock iShares",
+      "category": "all_equity_portfolio", "mer": 0.20, "holdings_count": 9000, "top10_weight": 15.0,
+      "dividend_yield": 1.8, "distribution_frequency": "quarterly", "equity_pct": 100, "fixed_income_pct": 0,
+      "region_mix": {"canada": 25, "us": 45, "intl": 24, "em": 6},
+      "structure": "cdn_listed_wraps_us_etf", "currency": "CAD", "hedged": false
+    },
+    {
+      "ticker": "VEQT.TO", "name": "Vanguard All-Equity ETF Portfolio", "issuer": "Vanguard",
+      "category": "all_equity_portfolio", "mer": 0.24, "holdings_count": 13000, "top10_weight": 13.0,
+      "dividend_yield": 1.7, "distribution_frequency": "quarterly", "equity_pct": 100, "fixed_income_pct": 0,
+      "region_mix": {"canada": 30, "us": 44, "intl": 19, "em": 7},
+      "structure": "cdn_listed_wraps_us_etf", "currency": "CAD", "hedged": false
+    },
+    {
+      "ticker": "XGRO.TO", "name": "iShares Core Growth ETF Portfolio", "issuer": "BlackRock iShares",
+      "category": "growth_portfolio", "mer": 0.20, "holdings_count": 9000, "top10_weight": 14.0,
+      "dividend_yield": 2.1, "distribution_frequency": "quarterly", "equity_pct": 80, "fixed_income_pct": 20,
+      "region_mix": {"canada": 26, "us": 44, "intl": 24, "em": 6},
+      "structure": "cdn_listed_wraps_us_etf", "currency": "CAD", "hedged": false
+    },
+    {
+      "ticker": "VBAL.TO", "name": "Vanguard Balanced ETF Portfolio", "issuer": "Vanguard",
+      "category": "balanced_portfolio", "mer": 0.24, "holdings_count": 25000, "top10_weight": 12.0,
+      "dividend_yield": 2.4, "distribution_frequency": "quarterly", "equity_pct": 60, "fixed_income_pct": 40,
+      "region_mix": {"canada": 32, "us": 40, "intl": 21, "em": 7},
+      "structure": "cdn_listed_wraps_us_etf", "currency": "CAD", "hedged": false
+    },
+    {
+      "ticker": "VFV.TO", "name": "Vanguard S&P 500 Index ETF", "issuer": "Vanguard",
+      "category": "us_equity", "mer": 0.09, "holdings_count": 503, "top10_weight": 36.0,
+      "dividend_yield": 1.1, "distribution_frequency": "quarterly", "equity_pct": 100, "fixed_income_pct": 0,
+      "region_mix": {"canada": 0, "us": 100, "intl": 0, "em": 0},
+      "structure": "cdn_listed_wraps_us_etf", "currency": "CAD", "hedged": false
+    },
+    {
+      "ticker": "XIU.TO", "name": "iShares S&P/TSX 60 Index ETF", "issuer": "BlackRock iShares",
+      "category": "canadian_equity", "mer": 0.18, "holdings_count": 60, "top10_weight": 40.0,
+      "dividend_yield": 2.8, "distribution_frequency": "quarterly", "equity_pct": 100, "fixed_income_pct": 0,
+      "region_mix": {"canada": 100, "us": 0, "intl": 0, "em": 0},
+      "structure": "canadian_equity", "currency": "CAD", "hedged": false
+    },
+    {
+      "ticker": "VDY.TO", "name": "Vanguard FTSE Canadian High Dividend Yield Index ETF", "issuer": "Vanguard",
+      "category": "canadian_dividend", "mer": 0.22, "holdings_count": 55, "top10_weight": 60.0,
+      "dividend_yield": 4.3, "distribution_frequency": "monthly", "equity_pct": 100, "fixed_income_pct": 0,
+      "region_mix": {"canada": 100, "us": 0, "intl": 0, "em": 0},
+      "structure": "canadian_equity", "currency": "CAD", "hedged": false
+    },
+    {
+      "ticker": "ZEB.TO", "name": "BMO Equal Weight Banks Index ETF", "issuer": "BMO",
+      "category": "canadian_sector", "mer": 0.61, "holdings_count": 6, "top10_weight": 100.0,
+      "dividend_yield": 4.0, "distribution_frequency": "monthly", "equity_pct": 100, "fixed_income_pct": 0,
+      "region_mix": {"canada": 100, "us": 0, "intl": 0, "em": 0},
+      "structure": "canadian_equity", "currency": "CAD", "hedged": false
+    },
+    {
+      "ticker": "ZAG.TO", "name": "BMO Aggregate Bond Index ETF", "issuer": "BMO",
+      "category": "canadian_bonds", "mer": 0.09, "holdings_count": 1500, "top10_weight": 18.0,
+      "dividend_yield": 3.3, "distribution_frequency": "monthly", "equity_pct": 0, "fixed_income_pct": 100,
+      "region_mix": {"canada": 100, "us": 0, "intl": 0, "em": 0},
+      "structure": "fixed_income", "currency": "CAD", "hedged": false
+    },
+    {
+      "ticker": "VOO", "name": "Vanguard S&P 500 ETF (US-listed)", "issuer": "Vanguard",
+      "category": "us_equity", "mer": 0.03, "holdings_count": 503, "top10_weight": 36.0,
+      "dividend_yield": 1.3, "distribution_frequency": "quarterly", "equity_pct": 100, "fixed_income_pct": 0,
+      "region_mix": {"canada": 0, "us": 100, "intl": 0, "em": 0},
+      "structure": "us_listed", "currency": "USD", "hedged": false
+    }
+  ]
+}

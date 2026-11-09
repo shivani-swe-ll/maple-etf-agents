@@ -1,0 +1,198 @@
+{
+  "_note": "Golden scenarios. Each case = an ETF (from the catalog, optionally changed) + a price path + an investor. 'expected' is what a careful human analyst would say. Prices are synthetic so results are reproducible.",
+  "cases": [
+    {
+      "id": "voo-in-tfsa",
+      "description": "US-listed ETF in a TFSA loses US withholding tax; should not be a BUY.",
+      "base": "VOO", "prices": {"annual_return": 0.10, "annual_vol": 0.10, "seed": 1},
+      "profile": {"account": "TFSA", "risk": "medium", "goal": "growth"},
+      "expected": {"agents": {"tax_account": "bearish", "cost": "bullish"}, "decision": ["HOLD", "AVOID"]},
+      "tags": ["tax", "veto"]
+    },
+    {
+      "id": "voo-in-rrsp",
+      "description": "Same US-listed ETF in an RRSP is treaty-exempt; tax agent should like it.",
+      "base": "VOO", "prices": {"annual_return": 0.10, "annual_vol": 0.10, "seed": 1},
+      "profile": {"account": "RRSP", "risk": "medium", "goal": "growth"},
+      "expected": {"agents": {"tax_account": "bullish"}, "decision": ["BUY", "HOLD"]},
+      "tags": ["tax"]
+    },
+    {
+      "id": "voo-in-fhsa",
+      "description": "US-listed, 100% equity in an FHSA: withholding lost and short horizon.",
+      "base": "VOO", "prices": {"annual_return": 0.10, "annual_vol": 0.10, "seed": 2},
+      "profile": {"account": "FHSA", "risk": "medium", "goal": "growth"},
+      "expected": {"agents": {"tax_account": "bearish"}, "decision": ["HOLD", "AVOID"]},
+      "tags": ["tax", "veto"]
+    },
+    {
+      "id": "voo-non-registered",
+      "description": "US-listed in non-registered: foreign tax credit available, so not a veto.",
+      "base": "VOO", "prices": {"annual_return": 0.10, "annual_vol": 0.10, "seed": 3},
+      "profile": {"account": "NON_REGISTERED", "risk": "medium", "goal": "growth"},
+      "expected": {"agents": {"tax_account": "neutral"}},
+      "tags": ["tax"]
+    },
+    {
+      "id": "bonds-non-registered",
+      "description": "Bond ETF in a taxable account: interest fully taxed.",
+      "base": "ZAG.TO", "prices": {"annual_return": 0.03, "annual_vol": 0.05, "seed": 4},
+      "profile": {"account": "NON_REGISTERED", "risk": "low", "goal": "income"},
+      "expected": {"agents": {"tax_account": "bearish", "risk": "bullish"}},
+      "tags": ["tax"]
+    },
+    {
+      "id": "bonds-rrsp-low-risk",
+      "description": "Cheap broad bond ETF in an RRSP for a low-risk investor is a sensible buy.",
+      "base": "ZAG.TO", "prices": {"annual_return": 0.04, "annual_vol": 0.05, "seed": 5},
+      "profile": {"account": "RRSP", "risk": "low", "goal": "income"},
+      "expected": {"agents": {"tax_account": "bullish", "risk": "bullish", "cost": "bullish"}, "decision": ["BUY"]},
+      "tags": ["tax", "risk"]
+    },
+    {
+      "id": "cdn-dividends-non-registered",
+      "description": "Canadian dividend ETF in a taxable account gets the dividend tax credit.",
+      "base": "VDY.TO", "prices": {"annual_return": 0.08, "annual_vol": 0.10, "seed": 6},
+      "profile": {"account": "NON_REGISTERED", "risk": "medium", "goal": "income"},
+      "expected": {"agents": {"tax_account": "bullish", "income": "bullish"}, "decision": ["BUY"]},
+      "tags": ["tax", "income"]
+    },
+    {
+      "id": "all-equity-fhsa",
+      "description": "100% stock portfolio in an FHSA: diversified but risky for a short horizon.",
+      "base": "XEQT.TO", "prices": {"annual_return": 0.08, "annual_vol": 0.12, "seed": 7},
+      "profile": {"account": "FHSA", "risk": "medium", "goal": "growth"},
+      "expected": {"agents": {"tax_account": "neutral", "diversification": "bullish"}},
+      "tags": ["tax"]
+    },
+    {
+      "id": "xeqt-tfsa-growth",
+      "description": "Low-cost global all-in-one ETF in a TFSA for a growth investor: classic BUY.",
+      "base": "XEQT.TO", "prices": {"annual_return": 0.09, "annual_vol": 0.11, "seed": 8},
+      "profile": {"account": "TFSA", "risk": "high", "goal": "growth"},
+      "expected": {"agents": {"diversification": "bullish", "cost": "bullish"}, "decision": ["BUY"]},
+      "tags": ["happy_path"]
+    },
+    {
+      "id": "veqt-steady-uptrend",
+      "description": "Steady uptrend should give a bullish momentum signal.",
+      "base": "VEQT.TO", "prices": {"annual_return": 0.25, "annual_vol": 0.08, "seed": 9},
+      "profile": {"account": "TFSA", "risk": "high", "goal": "growth"},
+      "expected": {"agents": {"momentum": "bullish"}, "decision": ["BUY"]},
+      "tags": ["momentum"]
+    },
+    {
+      "id": "crash-momentum",
+      "description": "A 30% fall in the last two months should turn momentum bearish.",
+      "base": "VFV.TO", "prices": {"annual_return": 0.08, "annual_vol": 0.12, "seed": 10, "crash_pct": 0.30, "crash_days_from_end": 40},
+      "profile": {"account": "TFSA", "risk": "high", "goal": "growth"},
+      "expected": {"agents": {"momentum": "bearish"}},
+      "tags": ["momentum"]
+    },
+    {
+      "id": "crash-low-risk-investor",
+      "description": "After a sharp crash, a low-risk investor should not be told to buy.",
+      "base": "XIU.TO", "prices": {"annual_return": 0.06, "annual_vol": 0.18, "seed": 11, "crash_pct": 0.30, "crash_days_from_end": 40},
+      "profile": {"account": "TFSA", "risk": "low", "goal": "growth"},
+      "expected": {"agents": {"risk": "bearish", "momentum": "bearish"}, "decision": ["AVOID", "HOLD"]},
+      "tags": ["risk", "momentum"]
+    },
+    {
+      "id": "volatile-for-low-risk",
+      "description": "25% volatility is far above a low-risk investor's comfort zone.",
+      "base": "VFV.TO", "prices": {"annual_return": 0.10, "annual_vol": 0.25, "seed": 12},
+      "profile": {"account": "TFSA", "risk": "low", "goal": "growth"},
+      "expected": {"agents": {"risk": "bearish"}, "decision": ["HOLD", "AVOID"]},
+      "tags": ["risk", "veto"]
+    },
+    {
+      "id": "same-etf-high-risk",
+      "description": "The same volatile ETF is acceptable for a high-risk investor.",
+      "base": "VFV.TO", "prices": {"annual_return": 0.10, "annual_vol": 0.18, "seed": 12},
+      "profile": {"account": "TFSA", "risk": "high", "goal": "growth"},
+      "expected": {"agents": {"risk": "bullish"}},
+      "tags": ["risk"]
+    },
+    {
+      "id": "bank-sector-concentration",
+      "description": "6-stock bank ETF with a high fee: concentrated and expensive.",
+      "base": "ZEB.TO", "prices": {"annual_return": 0.07, "annual_vol": 0.16, "seed": 13},
+      "profile": {"account": "TFSA", "risk": "medium", "goal": "growth"},
+      "expected": {"agents": {"diversification": "bearish", "cost": "bearish"}, "decision": ["HOLD", "AVOID"]},
+      "tags": ["diversification", "cost"]
+    },
+    {
+      "id": "high-fee-fund",
+      "description": "Hypothetical fund that copies XIU but charges 1.5%. Fees should sink it.",
+      "base": "XIU.TO", "overrides": {"ticker": "HIGHFEE", "name": "Hypothetical high-fee fund", "mer": 1.5},
+      "prices": {"annual_return": 0.06, "annual_vol": 0.12, "seed": 14},
+      "profile": {"account": "TFSA", "risk": "medium", "goal": "growth"},
+      "expected": {"agents": {"cost": "bearish"}, "decision": ["HOLD", "AVOID"]},
+      "tags": ["cost"]
+    },
+    {
+      "id": "very-cheap-fund",
+      "description": "0.09% MER should be clearly bullish on cost.",
+      "base": "ZAG.TO", "prices": {"annual_return": 0.03, "annual_vol": 0.05, "seed": 15},
+      "profile": {"account": "TFSA", "risk": "low", "goal": "balanced"},
+      "expected": {"agents": {"cost": "bullish"}},
+      "tags": ["cost"]
+    },
+    {
+      "id": "income-goal-low-yield",
+      "description": "Income investor looking at a 1.1% yielder: income agent should be bearish.",
+      "base": "VFV.TO", "prices": {"annual_return": 0.09, "annual_vol": 0.12, "seed": 16},
+      "profile": {"account": "TFSA", "risk": "medium", "goal": "income"},
+      "expected": {"agents": {"income": "bearish"}},
+      "tags": ["income"]
+    },
+    {
+      "id": "income-goal-monthly-payer",
+      "description": "Income investor, 4.3% monthly payer: income agent bullish.",
+      "base": "VDY.TO", "prices": {"annual_return": 0.07, "annual_vol": 0.11, "seed": 17},
+      "profile": {"account": "TFSA", "risk": "medium", "goal": "income"},
+      "expected": {"agents": {"income": "bullish"}},
+      "tags": ["income"]
+    },
+    {
+      "id": "growth-goal-ignores-yield",
+      "description": "Growth investor: yield should not push the income agent either way.",
+      "base": "VDY.TO", "prices": {"annual_return": 0.07, "annual_vol": 0.11, "seed": 18},
+      "profile": {"account": "TFSA", "risk": "medium", "goal": "growth"},
+      "expected": {"agents": {"income": "neutral"}},
+      "tags": ["income"]
+    },
+    {
+      "id": "single-country-diversification",
+      "description": "60 Canadian stocks, one country, 40% in top 10: not well diversified.",
+      "base": "XIU.TO", "prices": {"annual_return": 0.07, "annual_vol": 0.12, "seed": 19},
+      "profile": {"account": "TFSA", "risk": "medium", "goal": "growth"},
+      "expected": {"agents": {"diversification": "bearish"}},
+      "tags": ["diversification"]
+    },
+    {
+      "id": "balanced-low-risk",
+      "description": "60/40 balanced ETF for a low-risk, balanced investor: good fit.",
+      "base": "VBAL.TO", "prices": {"annual_return": 0.06, "annual_vol": 0.07, "seed": 20},
+      "profile": {"account": "TFSA", "risk": "low", "goal": "balanced"},
+      "expected": {"agents": {"risk": "bullish", "diversification": "bullish"}, "decision": ["BUY"]},
+      "tags": ["happy_path", "risk"]
+    },
+    {
+      "id": "short-history",
+      "description": "Only 3 months of prices: momentum must not pretend to know the trend.",
+      "base": "XGRO.TO", "prices": {"annual_return": 0.08, "annual_vol": 0.10, "seed": 21, "days": 63},
+      "profile": {"account": "TFSA", "risk": "medium", "goal": "growth"},
+      "expected": {"agents": {"momentum": "neutral"}},
+      "tags": ["edge_case"]
+    },
+    {
+      "id": "worst-case-all-red-flags",
+      "description": "Worst case: US-listed, volatile, falling, in a TFSA for a low-risk investor. Must AVOID.",
+      "base": "VOO", "prices": {"annual_return": 0.05, "annual_vol": 0.24, "seed": 22, "crash_pct": 0.25, "crash_days_from_end": 30},
+      "profile": {"account": "TFSA", "risk": "low", "goal": "growth"},
+      "expected": {"agents": {"tax_account": "bearish", "risk": "bearish"}, "decision": ["AVOID"]},
+      "tags": ["veto", "risk", "tax"]
+    }
+  ]
+}

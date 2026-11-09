@@ -1,0 +1,12 @@
+# Core (needed to run)
+numpy>=1.26
+pandas>=2.1
+pydantic>=2.5
+python-dotenv>=1.0
+
+# Optional: real market data and the web app
+yfinance>=0.2.40
+streamlit>=1.35
+
+# Tests
+pytest>=8

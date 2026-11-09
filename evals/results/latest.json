@@ -1,0 +1,190 @@
+{
+  "timestamp": "2026-11-09T16:56:54",
+  "llm": "off (rules + template explanations)",
+  "cases": 24,
+  "cases_passed": 24,
+  "agent_accuracy": 1.0,
+  "agent_accuracy_by_agent": {
+    "cost": 1.0,
+    "diversification": 1.0,
+    "income": 1.0,
+    "momentum": 1.0,
+    "risk": 1.0,
+    "tax_account": 1.0
+  },
+  "decision_accuracy": 1.0,
+  "groundedness": 1.0,
+  "failure_types": {},
+  "llm_usage": null,
+  "rows": [
+    {
+      "case": "voo-in-tfsa",
+      "pass": true,
+      "decision": "HOLD",
+      "score": 0.36,
+      "explanation_source": "template"
+    },
+    {
+      "case": "voo-in-rrsp",
+      "pass": true,
+      "decision": "BUY",
+      "score": 0.583,
+      "explanation_source": "template"
+    },
+    {
+      "case": "voo-in-fhsa",
+      "pass": true,
+      "decision": "HOLD",
+      "score": 0.099,
+      "explanation_source": "template"
+    },
+    {
+      "case": "voo-non-registered",
+      "pass": true,
+      "decision": "BUY",
+      "score": 0.502,
+      "explanation_source": "template"
+    },
+    {
+      "case": "bonds-non-registered",
+      "pass": true,
+      "decision": "BUY",
+      "score": 0.313,
+      "explanation_source": "template"
+    },
+    {
+      "case": "bonds-rrsp-low-risk",
+      "pass": true,
+      "decision": "BUY",
+      "score": 0.608,
+      "explanation_source": "template"
+    },
+    {
+      "case": "cdn-dividends-non-registered",
+      "pass": true,
+      "decision": "BUY",
+      "score": 0.587,
+      "explanation_source": "template"
+    },
+    {
+      "case": "all-equity-fhsa",
+      "pass": true,
+      "decision": "BUY",
+      "score": 0.338,
+      "explanation_source": "template"
+    },
+    {
+      "case": "xeqt-tfsa-growth",
+      "pass": true,
+      "decision": "BUY",
+      "score": 0.676,
+      "explanation_source": "template"
+    },
+    {
+      "case": "veqt-steady-uptrend",
+      "pass": true,
+      "decision": "BUY",
+      "score": 0.698,
+      "explanation_source": "template"
+    },
+    {
+      "case": "crash-momentum",
+      "pass": true,
+      "decision": "HOLD",
+      "score": 0.167,
+      "explanation_source": "template"
+    },
+    {
+      "case": "crash-low-risk-investor",
+      "pass": true,
+      "decision": "AVOID",
+      "score": -0.25,
+      "explanation_source": "template"
+    },
+    {
+      "case": "volatile-for-low-risk",
+      "pass": true,
+      "decision": "HOLD",
+      "score": 0.02,
+      "explanation_source": "template"
+    },
+    {
+      "case": "same-etf-high-risk",
+      "pass": true,
+      "decision": "BUY",
+      "score": 0.487,
+      "explanation_source": "template"
+    },
+    {
+      "case": "bank-sector-concentration",
+      "pass": true,
+      "decision": "AVOID",
+      "score": -0.282,
+      "explanation_source": "template"
+    },
+    {
+      "case": "high-fee-fund",
+      "pass": true,
+      "decision": "HOLD",
+      "score": 0.136,
+      "explanation_source": "template"
+    },
+    {
+      "case": "very-cheap-fund",
+      "pass": true,
+      "decision": "BUY",
+      "score": 0.649,
+      "explanation_source": "template"
+    },
+    {
+      "case": "income-goal-low-yield",
+      "pass": true,
+      "decision": "HOLD",
+      "score": 0.025,
+      "explanation_source": "template"
+    },
+    {
+      "case": "income-goal-monthly-payer",
+      "pass": true,
+      "decision": "BUY",
+      "score": 0.547,
+      "explanation_source": "template"
+    },
+    {
+      "case": "growth-goal-ignores-yield",
+      "pass": true,
+      "decision": "BUY",
+      "score": 0.289,
+      "explanation_source": "template"
+    },
+    {
+      "case": "single-country-diversification",
+      "pass": true,
+      "decision": "HOLD",
+      "score": 0.248,
+      "explanation_source": "template"
+    },
+    {
+      "case": "balanced-low-risk",
+      "pass": true,
+      "decision": "BUY",
+      "score": 0.475,
+      "explanation_source": "template"
+    },
+    {
+      "case": "short-history",
+      "pass": true,
+      "decision": "BUY",
+      "score": 0.624,
+      "explanation_source": "template"
+    },
+    {
+      "case": "worst-case-all-red-flags",
+      "pass": true,
+      "decision": "AVOID",
+      "score": -0.282,
+      "explanation_source": "template"
+    }
+  ],
+  "failures": []
+}
