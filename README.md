@@ -6,6 +6,8 @@ Six analyst agents look at an ETF from different angles: fees, trend, risk, dive
 
 Every number the LLM writes is **checked with code** against the agents' facts. If the LLM invents a number, its answer is rejected. An evaluation suite with 24 golden scenarios measures the system and runs in CI on every push.
 
+   **🚀 Live demo:** https://maple-etf-agents.streamlit.app/
+
 > ⚠️ Educational project. Not financial or tax advice.
 
 ![CI](https://img.shields.io/badge/tests-35%20passing-brightgreen) ![evals](https://img.shields.io/badge/golden%20evals-24%2F24-brightgreen) ![python](https://img.shields.io/badge/python-3.10%2B-blue) ![license](https://img.shields.io/badge/license-MIT-lightgrey)
