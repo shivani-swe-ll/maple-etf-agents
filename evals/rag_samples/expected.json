@@ -1,0 +1,14 @@
+{
+  "_note": "Expected values for the made-up sample fact sheets in this folder.",
+  "documents": {
+    "msge-global-equity.pdf": {"mer": 0.20, "holdings_count": 9412, "dividend_yield": 1.84, "distribution_frequency": "quarterly"},
+    "mscb-canadian-bond.txt": {"mer": 0.09, "holdings_count": 1512, "dividend_yield": 3.41, "distribution_frequency": "monthly"},
+    "msdi-dividend-income.md": {"mer": 0.39, "holdings_count": 52, "dividend_yield": 5.10, "distribution_frequency": "monthly"}
+  },
+  "questions": [
+    {"question": "What is the MER of the bond ETF?", "expected_source": "mscb-canadian-bond.txt"},
+    {"question": "How often does the global equity fund pay distributions?", "expected_source": "msge-global-equity.pdf"},
+    {"question": "Does the dividend income fund use covered call options?", "expected_source": "msdi-dividend-income.md"},
+    {"question": "How much could the bond price fall if interest rates rise?", "expected_source": "mscb-canadian-bond.txt"}
+  ]
+}

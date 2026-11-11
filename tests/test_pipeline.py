@@ -38,3 +38,25 @@ def test_cli_analyze(capsys):
 def test_cli_unknown_ticker():
     with pytest.raises(KeyError):
         main(["analyze", "NOPE.TO", "--llm", "off", "--trace", ""])
+
+
+def test_csv_export_has_one_row_per_etf(catalog, provider):
+    import io
+
+    import pandas as pd
+
+    from maple_etf.graph import analyze_tickers
+    from maple_etf.report import results_to_csv, results_to_json
+
+    results = analyze_tickers(["XEQT.TO", "ZWC.TO", "VOO"], InvestorProfile(), catalog, provider)
+    df = pd.read_csv(io.StringIO(results_to_csv(results)))
+    assert list(df["ticker"]) == ["XEQT.TO", "ZWC.TO", "VOO"]
+    for col in ("decision", "weighted_score", "tax_account_signal", "explanation"):
+        assert col in df.columns
+    assert '"reasons"' in results_to_json(results)
+
+
+def test_cli_csv_option(tmp_path):
+    out = tmp_path / "out" / "analysis.csv"
+    assert main(["analyze", "XEQT.TO", "XBB.TO", "--brief", "--llm", "off", "--trace", "", "--csv", str(out)]) == 0
+    assert out.read_text().count("\n") == 3  # header + 2 ETFs

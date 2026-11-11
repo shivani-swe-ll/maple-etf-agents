@@ -1,0 +1,12 @@
+# Start the API and the web app together:  docker compose up --build
+services:
+  api:
+    build: .
+    ports: ["8000:8000"]
+    env_file: [{path: .env, required: false}]
+  web:
+    build: .
+    command: ["streamlit", "run", "app/streamlit_app.py", "--server.address=0.0.0.0", "--server.port=8501"]
+    ports: ["8501:8501"]
+    env_file: [{path: .env, required: false}]
+    healthcheck: {disable: true}

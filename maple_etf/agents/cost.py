@@ -28,4 +28,10 @@ class CostAgent(Agent):
             f"MER is {mer:.2f}%, which is {label} for an ETF.",
             f"On $10,000 over 25 years (6% gross return), fees cost about ${drag:,.0f}.",
         ]
-        return self._report(score, 90, reasons, {"mer_pct": mer, "fee_drag_25y_on_10k": round(drag, 2)})
+        if etf.profile.hedged:
+            score -= 0.1
+            reasons.append(
+                "It is currency-hedged: this removes USD/CAD swings but has a small extra cost that is not in the MER."
+            )
+        metrics = {"mer_pct": mer, "fee_drag_25y_on_10k": round(drag, 2), "hedged": etf.profile.hedged}
+        return self._report(score, 90, reasons, metrics)

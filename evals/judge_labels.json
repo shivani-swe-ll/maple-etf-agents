@@ -1,0 +1,200 @@
+{
+  "_note": "Human grades for explanations. 'starter' labels were written with the project to get you going: review them, change any you disagree with, and add your own with: python -m maple_etf judge label",
+  "items": [
+    {
+      "id": "xeqt-template",
+      "ticker": "XEQT.TO",
+      "decision": "BUY",
+      "facts": "MER is 0.20%, which is low for an ETF. On $10,000 over 25 years (6% gross return), fees cost about $1,979. 12-month return is 15.1%. Price is 12.4% above its 200-day average. 50-day average is above the 200-day average (uptrend). 1-year volatility is 10.6%; limit for a high-risk investor is 25%. Worst fall in the last year was -11.1%; comfort limit is -35%. Holds about 9,000 securities. Top 10 holdings are 15% of the fund. Spread across 4 regions (largest: us at 45%). Distribution yield is about 1.8%, paid quarterly. Goal is growth, so yield is not important here. Canadian-listed and traded in CAD, so it is simple to hold in any account. About 75% is foreign, so roughly 0.20% a year may be lost to foreign withholding tax. Decision: BUY, weighted score +0.68.",
+      "explanation": "BUY XEQT.TO (weighted score +0.68). Strongest point (diversification): Holds about 9,000 securities.",
+      "human": {
+        "correct": true,
+        "clear": true,
+        "simple": true
+      },
+      "label_source": "starter"
+    },
+    {
+      "id": "xeqt-good-plain",
+      "ticker": "XEQT.TO",
+      "decision": "BUY",
+      "facts": "MER is 0.20%, which is low for an ETF. On $10,000 over 25 years (6% gross return), fees cost about $1,979. 12-month return is 15.1%. Price is 12.4% above its 200-day average. 50-day average is above the 200-day average (uptrend). 1-year volatility is 10.6%; limit for a high-risk investor is 25%. Worst fall in the last year was -11.1%; comfort limit is -35%. Holds about 9,000 securities. Top 10 holdings are 15% of the fund. Spread across 4 regions (largest: us at 45%). Distribution yield is about 1.8%, paid quarterly. Goal is growth, so yield is not important here. Canadian-listed and traded in CAD, so it is simple to hold in any account. About 75% is foreign, so roughly 0.20% a year may be lost to foreign withholding tax. Decision: BUY, weighted score +0.68.",
+      "explanation": "BUY XEQT. It is cheap (MER 0.20%) and holds about 9,000 companies in 4 regions, so one bad company or country will not hurt you much. It fits a TFSA well.",
+      "human": {
+        "correct": true,
+        "clear": true,
+        "simple": true
+      },
+      "label_source": "starter"
+    },
+    {
+      "id": "xeqt-jargon",
+      "ticker": "XEQT.TO",
+      "decision": "BUY",
+      "facts": "MER is 0.20%, which is low for an ETF. On $10,000 over 25 years (6% gross return), fees cost about $1,979. 12-month return is 15.1%. Price is 12.4% above its 200-day average. 50-day average is above the 200-day average (uptrend). 1-year volatility is 10.6%; limit for a high-risk investor is 25%. Worst fall in the last year was -11.1%; comfort limit is -35%. Holds about 9,000 securities. Top 10 holdings are 15% of the fund. Spread across 4 regions (largest: us at 45%). Distribution yield is about 1.8%, paid quarterly. Goal is growth, so yield is not important here. Canadian-listed and traded in CAD, so it is simple to hold in any account. About 75% is foreign, so roughly 0.20% a year may be lost to foreign withholding tax. Decision: BUY, weighted score +0.68.",
+      "explanation": "BUY. XEQT shows a favourable risk-adjusted profile with a 1-year volatility of 10.6% versus a 25% limit, a contained drawdown of -11.1% and low tracking error, while its factor exposure across 4 regions supports diversification benefits for the portfolio.",
+      "human": {
+        "correct": true,
+        "clear": true,
+        "simple": false
+      },
+      "label_source": "starter"
+    },
+    {
+      "id": "voo-template",
+      "ticker": "VOO",
+      "decision": "HOLD",
+      "facts": "MER is 0.03%, which is very low for an ETF. On $10,000 over 25 years (6% gross return), fees cost about $303. 12-month return is 13.8%. Price is 11.1% above its 200-day average. 50-day average is above the 200-day average (uptrend). 1-year volatility is 9.2%; limit for a medium-risk investor is 15%. Worst fall in the last year was -5.3%; comfort limit is -20%. Holds about 503 securities. Top 10 holdings are 36% of the fund. Only one country: 100% in us. Distribution yield is about 1.3%, paid quarterly. Goal is growth, so yield is not important here. US-listed ETF in a TFSA: about 15% of US dividends are withheld and cannot be recovered. A Canadian-listed version of the same index is usually a better fit for this account. Decision: HOLD, weighted score +0.36.",
+      "explanation": "HOLD VOO (weighted score +0.36). Strongest point (cost): MER is 0.03%, which is very low for an ETF. Biggest concern (tax_account): US-listed ETF in a TFSA: about 15% of US dividends are withheld and cannot be recovered. Tax/account veto: this ETF is a poor fit for this account type.",
+      "human": {
+        "correct": true,
+        "clear": true,
+        "simple": true
+      },
+      "label_source": "starter"
+    },
+    {
+      "id": "voo-wrong-decision",
+      "ticker": "VOO",
+      "decision": "HOLD",
+      "facts": "MER is 0.03%, which is very low for an ETF. On $10,000 over 25 years (6% gross return), fees cost about $303. 12-month return is 13.8%. Price is 11.1% above its 200-day average. 50-day average is above the 200-day average (uptrend). 1-year volatility is 9.2%; limit for a medium-risk investor is 15%. Worst fall in the last year was -5.3%; comfort limit is -20%. Holds about 503 securities. Top 10 holdings are 36% of the fund. Only one country: 100% in us. Distribution yield is about 1.3%, paid quarterly. Goal is growth, so yield is not important here. US-listed ETF in a TFSA: about 15% of US dividends are withheld and cannot be recovered. A Canadian-listed version of the same index is usually a better fit for this account. Decision: HOLD, weighted score +0.36.",
+      "explanation": "BUY VOO. It has the lowest fee of all, only 0.03%, so it is the best choice for your TFSA.",
+      "human": {
+        "correct": false,
+        "clear": true,
+        "simple": true
+      },
+      "label_source": "starter"
+    },
+    {
+      "id": "voo-wrong-number",
+      "ticker": "VOO",
+      "decision": "HOLD",
+      "facts": "MER is 0.03%, which is very low for an ETF. On $10,000 over 25 years (6% gross return), fees cost about $303. 12-month return is 13.8%. Price is 11.1% above its 200-day average. 50-day average is above the 200-day average (uptrend). 1-year volatility is 9.2%; limit for a medium-risk investor is 15%. Worst fall in the last year was -5.3%; comfort limit is -20%. Holds about 503 securities. Top 10 holdings are 36% of the fund. Only one country: 100% in us. Distribution yield is about 1.3%, paid quarterly. Goal is growth, so yield is not important here. US-listed ETF in a TFSA: about 15% of US dividends are withheld and cannot be recovered. A Canadian-listed version of the same index is usually a better fit for this account. Decision: HOLD, weighted score +0.36.",
+      "explanation": "HOLD VOO. In a TFSA you lose about 30% of the US dividends to tax, so a Canadian-listed version of the same index is a better fit.",
+      "human": {
+        "correct": false,
+        "clear": true,
+        "simple": true
+      },
+      "label_source": "starter"
+    },
+    {
+      "id": "zeb-template",
+      "ticker": "ZEB.TO",
+      "decision": "AVOID",
+      "facts": "MER is 0.61%, which is high for an ETF. On $10,000 over 25 years (6% gross return), fees cost about $5,766. 12-month return is 1.5%. Price is 9.5% above its 200-day average. 50-day average is above the 200-day average (uptrend). 1-year volatility is 16.7%; limit for a medium-risk investor is 15%. Worst fall in the last year was -17.1%; comfort limit is -20%. Holds about 6 securities. Top 10 holdings are 100% of the fund. Only one country: 100% in canada. Distribution yield is about 4.0%, paid monthly. Goal is growth, so yield is not important here. Canadian stocks have no foreign withholding tax, so they fit well in a TFSA. Decision: AVOID, weighted score -0.28.",
+      "explanation": "AVOID ZEB.TO (weighted score -0.28). Strongest point (momentum): 12-month return is 1.5%. Biggest concern (diversification): Holds about 6 securities.",
+      "human": {
+        "correct": true,
+        "clear": false,
+        "simple": true
+      },
+      "label_source": "starter"
+    },
+    {
+      "id": "zeb-good-plain",
+      "ticker": "ZEB.TO",
+      "decision": "AVOID",
+      "facts": "MER is 0.61%, which is high for an ETF. On $10,000 over 25 years (6% gross return), fees cost about $5,766. 12-month return is 1.5%. Price is 9.5% above its 200-day average. 50-day average is above the 200-day average (uptrend). 1-year volatility is 16.7%; limit for a medium-risk investor is 15%. Worst fall in the last year was -17.1%; comfort limit is -20%. Holds about 6 securities. Top 10 holdings are 100% of the fund. Only one country: 100% in canada. Distribution yield is about 4.0%, paid monthly. Goal is growth, so yield is not important here. Canadian stocks have no foreign withholding tax, so they fit well in a TFSA. Decision: AVOID, weighted score -0.28.",
+      "explanation": "AVOID ZEB. It holds only 6 banks, all in Canada, and its fee is high at 0.61%. Its price also moves more than a medium-risk investor is comfortable with.",
+      "human": {
+        "correct": true,
+        "clear": true,
+        "simple": true
+      },
+      "label_source": "starter"
+    },
+    {
+      "id": "zeb-vague",
+      "ticker": "ZEB.TO",
+      "decision": "AVOID",
+      "facts": "MER is 0.61%, which is high for an ETF. On $10,000 over 25 years (6% gross return), fees cost about $5,766. 12-month return is 1.5%. Price is 9.5% above its 200-day average. 50-day average is above the 200-day average (uptrend). 1-year volatility is 16.7%; limit for a medium-risk investor is 15%. Worst fall in the last year was -17.1%; comfort limit is -20%. Holds about 6 securities. Top 10 holdings are 100% of the fund. Only one country: 100% in canada. Distribution yield is about 4.0%, paid monthly. Goal is growth, so yield is not important here. Canadian stocks have no foreign withholding tax, so they fit well in a TFSA. Decision: AVOID, weighted score -0.28.",
+      "explanation": "This one is not great. Maybe look at other options.",
+      "human": {
+        "correct": true,
+        "clear": false,
+        "simple": true
+      },
+      "label_source": "starter"
+    },
+    {
+      "id": "vdy-template",
+      "ticker": "VDY.TO",
+      "decision": "BUY",
+      "facts": "MER is 0.22%, which is low for an ETF. On $10,000 over 25 years (6% gross return), fees cost about $2,172. 12-month return is 0.3%. Price is 1.6% above its 200-day average. 50-day average is above the 200-day average (uptrend). 1-year volatility is 10.2%; limit for a medium-risk investor is 15%. Worst fall in the last year was -6.8%; comfort limit is -20%. Holds about 55 securities. Top 10 holdings are 60% of the fund. Only one country: 100% in canada. Distribution yield is about 4.3%, paid monthly. Monthly payments suit an income investor. Goal is income, so yield matters a lot. Canadian dividends in a non-registered account get the dividend tax credit, which lowers your tax. Decision: BUY, weighted score +0.59.",
+      "explanation": "BUY VDY.TO (weighted score +0.59). Strongest point (risk): 1-year volatility is 10.2%; limit for a medium-risk investor is 15%. Biggest concern (diversification): Holds about 55 securities.",
+      "human": {
+        "correct": true,
+        "clear": true,
+        "simple": true
+      },
+      "label_source": "starter"
+    },
+    {
+      "id": "vdy-wrong-claim",
+      "ticker": "VDY.TO",
+      "decision": "BUY",
+      "facts": "MER is 0.22%, which is low for an ETF. On $10,000 over 25 years (6% gross return), fees cost about $2,172. 12-month return is 0.3%. Price is 1.6% above its 200-day average. 50-day average is above the 200-day average (uptrend). 1-year volatility is 10.2%; limit for a medium-risk investor is 15%. Worst fall in the last year was -6.8%; comfort limit is -20%. Holds about 55 securities. Top 10 holdings are 60% of the fund. Only one country: 100% in canada. Distribution yield is about 4.3%, paid monthly. Monthly payments suit an income investor. Goal is income, so yield matters a lot. Canadian dividends in a non-registered account get the dividend tax credit, which lowers your tax. Decision: BUY, weighted score +0.59.",
+      "explanation": "BUY VDY. It is a bond fund, so its price is very stable and it is safe for any investor who wants income every month.",
+      "human": {
+        "correct": false,
+        "clear": true,
+        "simple": true
+      },
+      "label_source": "starter"
+    },
+    {
+      "id": "vdy-rambling",
+      "ticker": "VDY.TO",
+      "decision": "BUY",
+      "facts": "MER is 0.22%, which is low for an ETF. On $10,000 over 25 years (6% gross return), fees cost about $2,172. 12-month return is 0.3%. Price is 1.6% above its 200-day average. 50-day average is above the 200-day average (uptrend). 1-year volatility is 10.2%; limit for a medium-risk investor is 15%. Worst fall in the last year was -6.8%; comfort limit is -20%. Holds about 55 securities. Top 10 holdings are 60% of the fund. Only one country: 100% in canada. Distribution yield is about 4.3%, paid monthly. Monthly payments suit an income investor. Goal is income, so yield matters a lot. Canadian dividends in a non-registered account get the dividend tax credit, which lowers your tax. Decision: BUY, weighted score +0.59.",
+      "explanation": "VDY could be considered as a possible candidate for inclusion given that the various characteristics including the distribution policy and the domestic orientation and the tax treatment of eligible dividends in non-registered accounts together with the monthly payment schedule and other considerations may or may not align with what an income investor could be looking for over time.",
+      "human": {
+        "correct": true,
+        "clear": false,
+        "simple": false
+      },
+      "label_source": "starter"
+    },
+    {
+      "id": "vfv-template",
+      "ticker": "VFV.TO",
+      "decision": "HOLD",
+      "facts": "MER is 0.09%, which is very low for an ETF. On $10,000 over 25 years (6% gross return), fees cost about $902. 12-month return is 24.5%. Price is 0.9% below its 200-day average. 50-day average is below the 200-day average (downtrend). 1-year volatility is 25.2%; limit for a low-risk investor is 8%. Worst fall in the last year was -18.2%; comfort limit is -10%. Holds about 503 securities. Top 10 holdings are 36% of the fund. Only one country: 100% in us. Distribution yield is about 1.1%, paid quarterly. Goal is growth, so yield is not important here. Canadian-listed and traded in CAD, so it is simple to hold in any account. About 100% is foreign, so roughly 0.17% a year may be lost to foreign withholding tax. Decision: HOLD, weighted score +0.02.",
+      "explanation": "HOLD VFV.TO (weighted score +0.02). Strongest point (cost): MER is 0.09%, which is very low for an ETF. Biggest concern (risk): 1-year volatility is 25.2%; limit for a low-risk investor is 8%. Risk veto: too volatile for this investor's risk tolerance.",
+      "human": {
+        "correct": true,
+        "clear": true,
+        "simple": true
+      },
+      "label_source": "starter"
+    },
+    {
+      "id": "vfv-good-plain",
+      "ticker": "VFV.TO",
+      "decision": "HOLD",
+      "facts": "MER is 0.09%, which is very low for an ETF. On $10,000 over 25 years (6% gross return), fees cost about $902. 12-month return is 24.5%. Price is 0.9% below its 200-day average. 50-day average is below the 200-day average (downtrend). 1-year volatility is 25.2%; limit for a low-risk investor is 8%. Worst fall in the last year was -18.2%; comfort limit is -10%. Holds about 503 securities. Top 10 holdings are 36% of the fund. Only one country: 100% in us. Distribution yield is about 1.1%, paid quarterly. Goal is growth, so yield is not important here. Canadian-listed and traded in CAD, so it is simple to hold in any account. About 100% is foreign, so roughly 0.17% a year may be lost to foreign withholding tax. Decision: HOLD, weighted score +0.02.",
+      "explanation": "HOLD VFV. The fee is very low, but its price moves too much for a low-risk investor: 25.2% a year, while your limit is 8%.",
+      "human": {
+        "correct": true,
+        "clear": true,
+        "simple": true
+      },
+      "label_source": "starter"
+    },
+    {
+      "id": "vfv-wrong-short",
+      "ticker": "VFV.TO",
+      "decision": "HOLD",
+      "facts": "MER is 0.09%, which is very low for an ETF. On $10,000 over 25 years (6% gross return), fees cost about $902. 12-month return is 24.5%. Price is 0.9% below its 200-day average. 50-day average is below the 200-day average (downtrend). 1-year volatility is 25.2%; limit for a low-risk investor is 8%. Worst fall in the last year was -18.2%; comfort limit is -10%. Holds about 503 securities. Top 10 holdings are 36% of the fund. Only one country: 100% in us. Distribution yield is about 1.1%, paid quarterly. Goal is growth, so yield is not important here. Canadian-listed and traded in CAD, so it is simple to hold in any account. About 100% is foreign, so roughly 0.17% a year may be lost to foreign withholding tax. Decision: HOLD, weighted score +0.02.",
+      "explanation": "AVOID VFV because it is expensive.",
+      "human": {
+        "correct": false,
+        "clear": true,
+        "simple": true
+      },
+      "label_source": "starter"
+    }
+  ]
+}

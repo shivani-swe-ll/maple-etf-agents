@@ -35,3 +35,45 @@ def detail(r: AnalysisResult) -> str:
     out.append(f"  Portfolio manager ({r.decision.decided_by}, explanation: {src}):")
     out.append(f"      {r.decision.explanation}")
     return "\n".join(out)
+
+
+# ---------- exports (used by the CLI --csv option and the web app download buttons) ----------
+
+def results_to_rows(results: list[AnalysisResult]) -> list[dict]:
+    """One flat row per ETF: easy to open in Excel or Google Sheets."""
+    rows = []
+    for r in results:
+        d = r.decision
+        row = {
+            "ticker": r.ticker,
+            "as_of": r.as_of,
+            "synthetic_data": r.synthetic_data,
+            "account": r.profile.account.value,
+            "risk": r.profile.risk.value,
+            "goal": r.profile.goal.value,
+            "decision": d.action.value,
+            "weighted_score": d.weighted_score,
+            "confidence_pct": d.confidence,
+            "max_allocation_pct": r.risk.max_allocation_pct,
+            "suggested_allocation_pct": d.suggested_allocation_pct,
+            "vetoes": " | ".join(d.vetoes),
+            "explanation": d.explanation,
+        }
+        for rep in r.reports:
+            row[f"{rep.agent}_signal"] = rep.signal.value
+            row[f"{rep.agent}_score"] = rep.score
+        rows.append(row)
+    return rows
+
+
+def results_to_csv(results: list[AnalysisResult]) -> str:
+    import pandas as pd
+
+    return pd.DataFrame(results_to_rows(results)).to_csv(index=False)
+
+
+def results_to_json(results: list[AnalysisResult]) -> str:
+    """Full detail: every agent's reasons and metrics."""
+    import json
+
+    return json.dumps([r.model_dump(mode="json") for r in results], indent=2)

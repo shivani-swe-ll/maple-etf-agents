@@ -29,9 +29,12 @@ class DiversificationAgent(Agent):
 
         top_region, top_share = max(p.region_mix.items(), key=lambda kv: kv[1])
         regions_used = sum(1 for v in p.region_mix.values() if v >= 5)
-        if top_share >= 95:
+        if top_share >= 95 and top_region in ("canada", "us"):
             score -= 0.3
-            reasons.append(f"Only one region: {top_share:.0f}% in {top_region}.")
+            reasons.append(f"Only one country: {top_share:.0f}% in {top_region}.")
+        elif top_share >= 95:
+            # "intl" and "em" are groups of many countries, so this is not single-country risk.
+            reasons.append(f"All in one region ({top_region}), but that region covers many countries.")
         elif regions_used >= 3:
             score += 0.3
             reasons.append(f"Spread across {regions_used} regions (largest: {top_region} at {top_share:.0f}%).")

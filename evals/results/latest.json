@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-11-09T16:56:54",
+  "timestamp": "2026-11-10T18:07:58",
   "llm": "off (rules + template explanations)",
-  "cases": 24,
-  "cases_passed": 24,
+  "cases": 34,
+  "cases_passed": 34,
   "agent_accuracy": 1.0,
   "agent_accuracy_by_agent": {
     "cost": 1.0,
@@ -14,6 +14,8 @@
   },
   "decision_accuracy": 1.0,
   "groundedness": 1.0,
+  "comparison_accuracy": 1.0,
+  "comparison_cases": 6,
   "failure_types": {},
   "llm_usage": null,
   "rows": [
@@ -183,6 +185,76 @@
       "pass": true,
       "decision": "AVOID",
       "score": -0.282,
+      "explanation_source": "template"
+    },
+    {
+      "case": "covered-call-income-goal",
+      "pass": true,
+      "decision": "BUY",
+      "score": 0.434,
+      "explanation_source": "template"
+    },
+    {
+      "case": "covered-call-growth-goal",
+      "pass": true,
+      "decision": "HOLD",
+      "score": 0.113,
+      "explanation_source": "template"
+    },
+    {
+      "case": "hedged-sp500-cost",
+      "pass": true,
+      "decision": "BUY",
+      "score": 0.535,
+      "explanation_source": "template"
+    },
+    {
+      "case": "zsp-tfsa-instead-of-voo",
+      "pass": true,
+      "decision": "BUY",
+      "score": 0.471,
+      "explanation_source": "template"
+    },
+    {
+      "case": "vcn-non-registered",
+      "pass": true,
+      "decision": "BUY",
+      "score": 0.534,
+      "explanation_source": "template"
+    },
+    {
+      "case": "xaw-global-diversification",
+      "pass": true,
+      "decision": "BUY",
+      "score": 0.494,
+      "explanation_source": "template"
+    },
+    {
+      "case": "xef-many-countries",
+      "pass": true,
+      "decision": "BUY",
+      "score": 0.37,
+      "explanation_source": "template"
+    },
+    {
+      "case": "xbb-non-registered",
+      "pass": true,
+      "decision": "BUY",
+      "score": 0.499,
+      "explanation_source": "template"
+    },
+    {
+      "case": "bonds-in-fhsa",
+      "pass": true,
+      "decision": "BUY",
+      "score": 0.578,
+      "explanation_source": "template"
+    },
+    {
+      "case": "vcn-crash-low-risk",
+      "pass": true,
+      "decision": "AVOID",
+      "score": -0.171,
       "explanation_source": "template"
     }
   ],

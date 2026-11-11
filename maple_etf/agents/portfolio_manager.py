@@ -162,10 +162,20 @@ class PortfolioManager:
         best = max(reports, key=lambda r: r.score)
         worst = min(reports, key=lambda r: r.score)
         parts = [f"{action.value} {ticker} (weighted score {score:+.2f})."]
-        if best.score > 0:
-            parts.append(f"Strongest point ({best.agent}): {best.reasons[0]}")
-        if worst.score < 0:
-            parts.append(f"Biggest concern ({worst.agent}): {worst.reasons[0]}")
+        good = f"({best.agent}): {best.reasons[0]}" if best.score > 0 else ""
+        bad = f"({worst.agent}): {worst.reasons[0]}" if worst.score < 0 else ""
+        # Lead with what matters for the decision. Judge labels showed that an AVOID starting with
+        # "Strongest point" confused readers.
+        if action == Action.AVOID:
+            if bad:
+                parts.append(f"Main reason {bad}")
+            if good:
+                parts.append(f"On the plus side {good}")
+        else:
+            if good:
+                parts.append(f"Strongest point {good}")
+            if bad:
+                parts.append(f"Biggest concern {bad}")
         parts.extend(vetoes)
         return " ".join(parts)
 

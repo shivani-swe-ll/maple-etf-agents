@@ -1,14 +1,15 @@
 # Eval results
 
-- Run: 2026-11-09T16:56:54
+- Run: 2026-11-10T18:07:58
 - LLM: off (rules + template explanations)
-- Cases passed: **24 / 24**
+- Cases passed: **34 / 34**
 
 | Metric | Score |
 |---|---|
 | Agent signal accuracy | 100% |
 | Decision accuracy | 100% |
 | Explanation groundedness | 100% |
+| Comparison winner accuracy (6 pairs) | 100% |
 
 | Agent | Accuracy |
 |---|---|

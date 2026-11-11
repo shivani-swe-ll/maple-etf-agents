@@ -74,3 +74,31 @@ def test_scores_stay_in_range(make_etf, profile, catalog):
         for a in agents:
             r = a.analyze(make_etf(t, annual_vol=0.3, seed=99), profile)
             assert -1 <= r.score <= 1 and r.reasons
+
+
+def test_new_etfs_are_in_catalog(catalog):
+    for t in ["VCN.TO", "ZSP.TO", "XSP.TO", "XAW.TO", "XEF.TO", "XBB.TO", "ZWC.TO"]:
+        assert t in catalog
+    assert len(catalog.tickers()) == 17
+
+
+def test_hedged_etf_costs_a_little_more(make_etf, profile):
+    hedged = CostAgent().analyze(make_etf("XSP.TO"), profile)
+    unhedged = CostAgent().analyze(make_etf("ZSP.TO"), profile)
+    assert hedged.score < unhedged.score
+    assert any("currency-hedged" in r for r in hedged.reasons)
+
+
+def test_covered_call_is_bad_for_growth_goal(make_etf):
+    etf = make_etf("ZWC.TO")
+    growth = IncomeAgent().analyze(etf, InvestorProfile(goal=Goal.GROWTH))
+    income = IncomeAgent().analyze(etf, InvestorProfile(goal=Goal.INCOME))
+    assert growth.signal == Signal.BEARISH
+    assert income.signal == Signal.BULLISH
+
+
+def test_international_region_is_not_called_one_country(make_etf, profile):
+    r = DiversificationAgent().analyze(make_etf("XEF.TO"), profile)
+    assert r.signal == Signal.BULLISH
+    assert not any("Only one country" in x for x in r.reasons)
+    assert any("Only one country" in x for x in DiversificationAgent().analyze(make_etf("XIU.TO"), profile).reasons)

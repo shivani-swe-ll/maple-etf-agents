@@ -18,6 +18,7 @@ from datetime import datetime
 from pathlib import Path
 
 from maple_etf.agents import PortfolioManager
+from maple_etf.compare import compare_etfs
 from maple_etf.data import load_catalog, make_price_path
 from maple_etf.graph import AgentGraph
 from maple_etf.grounding import ungrounded_numbers
@@ -33,6 +34,27 @@ def build_case(case: dict, catalog) -> tuple[ETFData, InvestorProfile]:
     return ETFData(profile=ETFProfile(**base), prices=prices, synthetic=True), InvestorProfile(**case["profile"])
 
 
+def build_etf(ticker: str, price_args: dict, catalog, overrides: dict | None = None) -> ETFData:
+    base = catalog.get(ticker).model_dump()
+    base.update(overrides or {})
+    prices = make_price_path(**{"days": 504, **price_args})
+    return ETFData(profile=ETFProfile(**base), prices=prices, synthetic=True)
+
+
+def run_comparison_cases(cases: list[dict], catalog, llm=None) -> tuple[list[bool], list[dict]]:
+    hits, failures = [], []
+    for case in cases:
+        a = build_etf(case["a"], case.get("prices_a", case.get("prices", {})), catalog)
+        b = build_etf(case["b"], case.get("prices_b", case.get("prices", {})), catalog)
+        res = compare_etfs(a, b, InvestorProfile(**case["profile"]), llm=llm)
+        ok = res.winner in case["expected_winner"]
+        hits.append(ok)
+        if not ok:
+            failures.append({"case": case["id"], "type": "comparison_mismatch", "expected": case["expected_winner"],
+                             "got": res.winner, "scores": [res.score_a, res.score_b]})
+    return hits, failures
+
+
 def run_evals(
     cases_path: str | Path = "evals/golden_cases.json",
     out_dir: str | Path | None = "evals/results",
@@ -41,7 +63,8 @@ def run_evals(
     verbose: bool = True,
 ) -> dict:
     catalog = load_catalog()
-    cases = json.loads(Path(cases_path).read_text(encoding="utf-8"))["cases"]
+    golden = json.loads(Path(cases_path).read_text(encoding="utf-8"))
+    cases = golden["cases"]
     graph = AgentGraph(llm=llm, llm_mode=llm_mode)
 
     agent_hits: dict[str, list[bool]] = defaultdict(list)
@@ -89,6 +112,9 @@ def run_evals(
         rows.append({"case": case["id"], "pass": case_ok, "decision": result.decision.action.value,
                      "score": result.decision.weighted_score, "explanation_source": result.decision.explanation_source})
 
+    comparison_hits, comparison_failures = run_comparison_cases(golden.get("comparisons", []), catalog, llm)
+    failures.extend(comparison_failures)
+
     rate = lambda xs: round(sum(xs) / len(xs), 3) if xs else None  # noqa: E731
     all_agent = [x for xs in agent_hits.values() for x in xs]
     summary = {
@@ -100,6 +126,8 @@ def run_evals(
         "agent_accuracy_by_agent": {a: rate(h) for a, h in sorted(agent_hits.items())},
         "decision_accuracy": rate(decision_hits),
         "groundedness": rate(grounded),
+        "comparison_accuracy": rate(comparison_hits),
+        "comparison_cases": len(comparison_hits),
         "failure_types": dict(Counter(f["type"] for f in failures)),
         "llm_usage": llm.usage if llm else None,
         "rows": rows,
@@ -130,6 +158,8 @@ def to_markdown(s: dict) -> str:
         f"| Agent signal accuracy | {s['agent_accuracy']:.0%} |",
         f"| Decision accuracy | {s['decision_accuracy']:.0%} |",
         f"| Explanation groundedness | {s['groundedness']:.0%} |",
+        *([f"| Comparison winner accuracy ({s['comparison_cases']} pairs) | {s['comparison_accuracy']:.0%} |"]
+          if s.get("comparison_cases") else []),
         "",
         "| Agent | Accuracy |",
         "|---|---|",

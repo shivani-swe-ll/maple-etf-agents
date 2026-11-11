@@ -193,6 +193,132 @@
       "profile": {"account": "TFSA", "risk": "low", "goal": "growth"},
       "expected": {"agents": {"tax_account": "bearish", "risk": "bearish"}, "decision": ["AVOID"]},
       "tags": ["veto", "risk", "tax"]
+    },
+    {
+      "id": "covered-call-income-goal",
+      "description": "Covered-call ETF (6.5% monthly) for an income investor: income agent likes it, cost agent does not (0.72% MER).",
+      "base": "ZWC.TO", "prices": {"annual_return": 0.06, "annual_vol": 0.10, "seed": 31},
+      "profile": {"account": "TFSA", "risk": "medium", "goal": "income"},
+      "expected": {"agents": {"income": "bullish", "cost": "bearish"}},
+      "tags": ["income", "cost", "covered_call"]
+    },
+    {
+      "id": "covered-call-growth-goal",
+      "description": "Covered-call ETF for a growth investor: capped upside works against the goal, so do not BUY.",
+      "base": "ZWC.TO", "prices": {"annual_return": 0.06, "annual_vol": 0.10, "seed": 32},
+      "profile": {"account": "TFSA", "risk": "medium", "goal": "growth"},
+      "expected": {"agents": {"income": "bearish", "diversification": "bearish"}, "decision": ["HOLD", "AVOID"]},
+      "tags": ["income", "covered_call"]
+    },
+    {
+      "id": "hedged-sp500-cost",
+      "description": "CAD-hedged S&P 500 ETF: still cheap overall, but the cost agent should mention the hidden hedging cost.",
+      "base": "XSP.TO", "prices": {"annual_return": 0.10, "annual_vol": 0.10, "seed": 33},
+      "profile": {"account": "TFSA", "risk": "medium", "goal": "growth"},
+      "expected": {"agents": {"cost": "bullish", "tax_account": "bullish"}},
+      "tags": ["cost", "hedged"]
+    },
+    {
+      "id": "zsp-tfsa-instead-of-voo",
+      "description": "Canadian-listed S&P 500 ETF is the TFSA-friendly way to own the US market (compare with voo-in-tfsa).",
+      "base": "ZSP.TO", "prices": {"annual_return": 0.12, "annual_vol": 0.09, "seed": 34},
+      "profile": {"account": "TFSA", "risk": "high", "goal": "growth"},
+      "expected": {"agents": {"tax_account": "bullish", "cost": "bullish"}, "decision": ["BUY"]},
+      "tags": ["tax", "happy_path"]
+    },
+    {
+      "id": "vcn-non-registered",
+      "description": "Very cheap broad Canadian ETF in a taxable account: dividend tax credit plus a 0.05% MER.",
+      "base": "VCN.TO", "prices": {"annual_return": 0.09, "annual_vol": 0.10, "seed": 35},
+      "profile": {"account": "NON_REGISTERED", "risk": "medium", "goal": "balanced"},
+      "expected": {"agents": {"tax_account": "bullish", "cost": "bullish"}},
+      "tags": ["tax", "cost"]
+    },
+    {
+      "id": "xaw-global-diversification",
+      "description": "About 9,000 stocks across the US, developed and emerging markets: clearly well diversified.",
+      "base": "XAW.TO", "prices": {"annual_return": 0.09, "annual_vol": 0.11, "seed": 36},
+      "profile": {"account": "RRSP", "risk": "medium", "goal": "growth"},
+      "expected": {"agents": {"diversification": "bullish"}, "decision": ["BUY"]},
+      "tags": ["diversification", "happy_path"]
+    },
+    {
+      "id": "xef-many-countries",
+      "description": "International developed markets ETF: one 'region' in our data, but 2,500 stocks in many countries. Must not be called concentrated.",
+      "base": "XEF.TO", "prices": {"annual_return": 0.07, "annual_vol": 0.11, "seed": 37},
+      "profile": {"account": "TFSA", "risk": "medium", "goal": "growth"},
+      "expected": {"agents": {"diversification": "bullish"}},
+      "tags": ["diversification", "edge_case"]
+    },
+    {
+      "id": "xbb-non-registered",
+      "description": "Second bond ETF in a taxable account: tax agent should flag fully-taxed interest, same as ZAG.",
+      "base": "XBB.TO", "prices": {"annual_return": 0.03, "annual_vol": 0.05, "seed": 38},
+      "profile": {"account": "NON_REGISTERED", "risk": "low", "goal": "balanced"},
+      "expected": {"agents": {"tax_account": "bearish"}},
+      "tags": ["tax"]
+    },
+    {
+      "id": "bonds-in-fhsa",
+      "description": "Bond ETF in an FHSA: sheltered and steady, a good fit for money needed for a home soon.",
+      "base": "XBB.TO", "prices": {"annual_return": 0.035, "annual_vol": 0.05, "seed": 39},
+      "profile": {"account": "FHSA", "risk": "low", "goal": "balanced"},
+      "expected": {"agents": {"tax_account": "bullish", "risk": "bullish"}, "decision": ["BUY"]},
+      "tags": ["tax", "risk", "happy_path"]
+    },
+    {
+      "id": "vcn-crash-low-risk",
+      "description": "Broad Canadian ETF after a 25% fall, for a low-risk investor: should not be a BUY even though it is cheap.",
+      "base": "VCN.TO", "prices": {"annual_return": 0.06, "annual_vol": 0.15, "seed": 40, "crash_pct": 0.25, "crash_days_from_end": 35},
+      "profile": {"account": "TFSA", "risk": "low", "goal": "growth"},
+      "expected": {"agents": {"risk": "bearish", "momentum": "bearish"}, "decision": ["HOLD", "AVOID"]},
+      "tags": ["risk", "momentum"]
+    }
+  ],
+  "comparisons": [
+    {
+      "id": "cmp-voo-vs-zsp-tfsa",
+      "description": "Same index, same prices. In a TFSA the Canadian-listed ZSP should win (no lost US withholding).",
+      "a": "VOO", "b": "ZSP.TO", "prices": {"annual_return": 0.10, "annual_vol": 0.10, "seed": 51},
+      "profile": {"account": "TFSA", "risk": "medium", "goal": "growth"},
+      "expected_winner": ["ZSP.TO"]
+    },
+    {
+      "id": "cmp-voo-vs-zsp-rrsp",
+      "description": "Same pair in an RRSP: VOO is treaty-exempt and cheaper, so it should win.",
+      "a": "VOO", "b": "ZSP.TO", "prices": {"annual_return": 0.10, "annual_vol": 0.10, "seed": 51},
+      "profile": {"account": "RRSP", "risk": "medium", "goal": "growth"},
+      "expected_winner": ["VOO"]
+    },
+    {
+      "id": "cmp-xeqt-vs-zeb",
+      "description": "Global 9,000-stock ETF vs a 6-bank sector ETF for a growth investor: XEQT should win.",
+      "a": "XEQT.TO", "b": "ZEB.TO", "prices": {"annual_return": 0.08, "annual_vol": 0.11, "seed": 52},
+      "profile": {"account": "TFSA", "risk": "medium", "goal": "growth"},
+      "expected_winner": ["XEQT.TO"]
+    },
+    {
+      "id": "cmp-zag-vs-xbb",
+      "description": "Two broad Canadian bond ETFs with almost the same MER and the same prices: should be a tie.",
+      "a": "ZAG.TO", "b": "XBB.TO", "prices": {"annual_return": 0.03, "annual_vol": 0.05, "seed": 53},
+      "profile": {"account": "RRSP", "risk": "low", "goal": "balanced"},
+      "expected_winner": ["tie"]
+    },
+    {
+      "id": "cmp-vdy-vs-zwc-income",
+      "description": "Income investor: VDY (4.3%, 0.22% MER) vs covered-call ZWC (6.5%, 0.72% MER, 40 stocks). The cheaper, broader VDY should win.",
+      "a": "VDY.TO", "b": "ZWC.TO", "prices": {"annual_return": 0.07, "annual_vol": 0.11, "seed": 54},
+      "profile": {"account": "NON_REGISTERED", "risk": "medium", "goal": "income"},
+      "expected_winner": ["VDY.TO"]
+    },
+    {
+      "id": "cmp-bonds-vs-stocks-fhsa-low-risk",
+      "description": "Low-risk FHSA saver: steady bond ETF vs a volatile all-stock ETF. Bonds should win.",
+      "a": "XBB.TO", "b": "XEQT.TO",
+      "prices_a": {"annual_return": 0.035, "annual_vol": 0.05, "seed": 55},
+      "prices_b": {"annual_return": 0.08, "annual_vol": 0.16, "seed": 56},
+      "profile": {"account": "FHSA", "risk": "low", "goal": "balanced"},
+      "expected_winner": ["XBB.TO"]
     }
   ]
 }

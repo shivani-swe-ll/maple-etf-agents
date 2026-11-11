@@ -11,6 +11,7 @@ class IncomeAgent(Agent):
     def analyze(self, etf: ETFData, profile: InvestorProfile) -> AgentReport:
         y = etf.profile.dividend_yield
         freq = etf.profile.distribution_frequency
+        covered_call = etf.profile.category == "covered_call"
         reasons = [f"Distribution yield is about {y:.1f}%, paid {freq}."]
 
         if profile.goal == Goal.INCOME:
@@ -29,4 +30,15 @@ class IncomeAgent(Agent):
             reasons.append("Goal is growth, so yield is not important here.")
             confidence = 40
 
-        return self._report(score, confidence, reasons, {"dividend_yield_pct": y, "frequency": freq})
+        if covered_call:
+            reasons.append(
+                "Covered-call ETF: part of the payout comes from selling options, and the price has less room to grow."
+            )
+            if profile.goal == Goal.GROWTH:
+                # Selling call options caps the upside, which works against a growth goal.
+                score -= 0.3
+                confidence = 70
+
+        return self._report(
+            score, confidence, reasons, {"dividend_yield_pct": y, "frequency": freq, "covered_call": covered_call}
+        )

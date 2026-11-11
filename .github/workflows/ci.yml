@@ -11,7 +11,23 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -e ".[dev]"
-      - name: Unit tests
+      - name: Unit tests (includes the FastAPI endpoints)
         run: pytest -q
       - name: Golden-set evals (fail if decision accuracy < 90%)
         run: python -m maple_etf eval --min-accuracy 0.9
+      - name: RAG eval (fact sheet extraction + retrieval)
+        run: python -m maple_etf rag eval --llm off
+      - name: Judge calibration (heuristic judge vs human labels)
+        run: python -m maple_etf judge eval
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the Docker image
+        run: docker build -t maple-etf-agents .
+      - name: Start the API and check /health
+        run: |
+          docker run -d -p 8000:8000 --name api maple-etf-agents
+          for i in $(seq 1 20); do curl -fs http://localhost:8000/health && exit 0; sleep 2; done
+          docker logs api; exit 1

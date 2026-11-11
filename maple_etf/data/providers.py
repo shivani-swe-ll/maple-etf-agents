@@ -24,6 +24,9 @@ _SAMPLE_PARAMS: dict[str, tuple[float, float]] = {
     "canadian_dividend": (0.075, 0.15),
     "canadian_sector": (0.07, 0.22),
     "canadian_bonds": (0.025, 0.06),
+    "global_equity": (0.10, 0.14),
+    "international_equity": (0.07, 0.14),
+    "covered_call": (0.06, 0.12),
 }
 
 
