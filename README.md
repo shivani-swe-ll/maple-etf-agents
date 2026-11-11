@@ -17,7 +17,7 @@ Every number an LLM writes is **checked with code** against the facts. If the LL
 
 > ⚠️ Educational project. Not financial or tax advice.
 
-![CI](https://img.shields.io/badge/tests-79%20passing-brightgreen) ![evals](https://img.shields.io/badge/golden%20evals-34%2F34-brightgreen) ![python](https://img.shields.io/badge/python-3.10%2B-blue) ![license](https://img.shields.io/badge/license-MIT-lightgrey)
+![CI](https://img.shields.io/badge/tests-80%20passing-brightgreen) ![evals](https://img.shields.io/badge/golden%20evals-34%2F34-brightgreen) ![python](https://img.shields.io/badge/python-3.10%2B-blue) ![license](https://img.shields.io/badge/license-MIT-lightgrey)
 
 ---
 
@@ -160,7 +160,7 @@ The web app has **CSV/JSON downloads**. The CLI has `--csv`. The monthly backtes
 | RAG retrieval (right document ranked first) | ↑ | **100%** (4/4) |
 | Heuristic judge vs human labels | `python -m maple_etf judge eval` | correct 93% (κ 0.82), clear 80% (κ 0.29), simple 100% |
 
-All of these run in **GitHub Actions** on every push, together with 79 tests and a Docker build that checks `/health`.
+All of these run in **GitHub Actions** on every push, together with 80 tests and a Docker build that checks `/health`.
 
 ### What the evals found (and what I fixed)
 
@@ -226,7 +226,7 @@ maple_etf/
   cli.py            command line
 app/streamlit_app.py  web app (6 tabs)
 evals/              golden_cases.json, judge_labels.json, rag_samples/, results/
-tests/              79 tests (fake LLM servers, no internet needed)
+tests/              80 tests (fake LLM servers, no internet needed)
 Dockerfile, docker-compose.yml, .github/workflows/ci.yml
 ```
 
