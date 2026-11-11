@@ -23,9 +23,13 @@ Every number an LLM writes is **checked with code** against the facts. If the LL
 
 ## Demo
 
-![Analyze screen](docs/analyze.png)
-
-![Backtest screen](docs/backtest.png)
+| Analyze | Compare |
+|---|---|
+| ![Analyze](docs/analyze.png) | ![Compare](docs/compare.png) |
+| **Portfolio** | **Chat** |
+| ![Portfolio](docs/portfolio.png) | ![Chat](docs/chat.png) |
+| **Fact sheets (RAG)** | **Backtest** |
+| ![Fact sheets](docs/factsheets.png) | ![Backtest](docs/backtest.png) |
 
 ```text
 $ python -m maple_etf analyze XEQT.TO VFV.TO VOO ZAG.TO ZEB.TO --account TFSA --brief
@@ -234,9 +238,6 @@ Dockerfile, docker-compose.yml, .github/workflows/ci.yml
 - The sample fact sheets in `evals/rag_samples` are **made up** for testing. Real PDFs vary more.
 - The golden set and the starter judge labels were written by one person. More cases and more reviewers would make them stronger.
 
-## Credits
-
-The multi-agent "investment committee" idea was inspired by [virattt/ai-hedge-fund](https://github.com/virattt/ai-hedge-fund). This project is a separate implementation that focuses on Canadian ETFs, account-aware tax logic, evals and guardrails.
 
 ## License
 
