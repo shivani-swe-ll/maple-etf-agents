@@ -49,10 +49,20 @@ def test_parse_holdings():
 def test_simple_two_fund_portfolio_is_healthy(catalog):
     etfs = dict(zip(["XEQT.TO", "ZAG.TO"], same_prices(catalog, "XEQT.TO", "ZAG.TO", vol=0.07)))
     rep = analyze_portfolio(etfs, {"XEQT.TO": 60, "ZAG.TO": 40}, InvestorProfile())
-    assert rep.weighted_mer_pct == pytest.approx(0.6 * 0.20 + 0.4 * 0.09)
+    assert rep.weighted_mer_pct == 0.16  # 0.6 * 0.20 + 0.4 * 0.09 = 0.156, rounded once
+    assert rep.annual_fee_per_10k == 16.0
     assert rep.equity_pct == 60 and rep.fixed_income_pct == 40
     assert rep.grade in ("A", "B")
     assert not [f for f in rep.findings if f.level == "warning"]
+
+
+def test_fee_is_the_same_number_everywhere(catalog):
+    # 50/50 XEQT + ZAG = 0.145%: the app once showed 0.14% at the top and 0.15% in the text.
+    etfs = dict(zip(["XEQT.TO", "ZAG.TO"], same_prices(catalog, "XEQT.TO", "ZAG.TO", vol=0.07)))
+    rep = analyze_portfolio(etfs, {"XEQT.TO": 50, "ZAG.TO": 50}, InvestorProfile())
+    shown = f"{rep.weighted_mer_pct:.2f}%"
+    assert shown == "0.15%"
+    assert shown in rep.summary and any(shown in f.message for f in rep.findings)
 
 
 def test_bad_portfolio_gets_warnings(catalog):

@@ -87,7 +87,8 @@ def analyze_portfolio(
                                 message=f"Your weights added up to {raw_total:.0f}%, so they were scaled to 100%."))
 
     profiles = {t: etfs[t].profile for t in weights}
-    mer = sum(w[t] * profiles[t].mer for t in w)
+    # Round once here, so every place that shows the fee (metric, findings, summary) shows the SAME number.
+    mer = round(sum(w[t] * profiles[t].mer for t in w) + 1e-9, 2)
     equity = sum(w[t] * profiles[t].equity_pct for t in w)
     bonds = sum(w[t] * profiles[t].fixed_income_pct for t in w)
     regions: dict[str, float] = {}
@@ -166,7 +167,7 @@ def analyze_portfolio(
     context = json.dumps({
         "investor": profile.model_dump(mode="json"),
         "holdings_pct": {t: round(v, 1) for t, v in weights.items()},
-        "average_mer_pct": round(mer, 3), "stocks_pct": round(equity, 1), "bonds_pct": round(bonds, 1),
+        "average_mer_pct": mer, "stocks_pct": round(equity, 1), "bonds_pct": round(bonds, 1),
         "regions_pct": {k: round(v, 1) for k, v in regions.items()}, "average_yield_pct": round(yld, 2),
         "health_score": score, "grade": grade,
         "findings": [f.model_dump() for f in findings],
@@ -177,7 +178,7 @@ def analyze_portfolio(
 
     return PortfolioReport(
         profile=profile, holdings={t: round(v, 2) for t, v in weights.items()},
-        weighted_mer_pct=round(mer, 3), annual_fee_per_10k=round(mer / 100 * 10_000, 2),
+        weighted_mer_pct=mer, annual_fee_per_10k=round(mer / 100 * 10_000, 2),
         equity_pct=round(equity, 1), fixed_income_pct=round(bonds, 1),
         region_mix={k: round(v, 1) for k, v in regions.items()}, weighted_yield_pct=round(yld, 2),
         est_withholding_drag_pct=round(drag, 3), volatility_1y=vol, max_drawdown_1y=dd,
